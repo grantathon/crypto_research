@@ -3,22 +3,22 @@
   "end_date": "2021-08-31",
   "dex": {
     "uniswap" : {
-      "coin_id": "uni"
+      "coin_id": "uniswap"
     },
     "uniswap_v2" : {
-      "coin_id": "uni"
+      "coin_id": "uniswap"
     },
     "uniswap_v1" : {
-      "coin_id": "uni"
+      "coin_id": "uniswap"
     },
     "sushiswap" : {
       "coin_id": "sushi"
     },
     "pancakeswap" : {
-      "coin_id": "cake"
+      "coin_id": "pancakeswap-token"
     },
     "pancakeswap_v1" : {
-      "coin_id": "cake"
+      "coin_id": "pancakeswap-token"
     },
     "dydx_perpetual" : {
       "coin_id": ""
@@ -30,10 +30,10 @@
       "coin_id": "leverj-gluon"
     },
     "futureswap" : {
-      "coin_id": "fst"
+      "coin_id": "futureswap"
     },
     "mcdex" : {
-      "coin_id": "mcb"
+      "coin_id": "mcdex"
     }
   }
 }
