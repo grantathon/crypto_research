@@ -6,7 +6,7 @@ from pprint import pprint
 
 CG_API_URL = "https://api.coingecko.com/api/v3/"
 
-def trading_volume(dex_cg_ids, start_date, end_date):
+def dex_trading_volume(cg_ids, start_date, end_date):
     df_dict = {}
 
     # Number of days we need for data call
@@ -16,7 +16,7 @@ def trading_volume(dex_cg_ids, start_date, end_date):
     days = (today - start_date).days + 1
 
     # Get trading volume data per DEX
-    for id in dex_cg_ids:
+    for id in cg_ids:
         # Get raw data from API
         req_url = CG_API_URL + 'exchanges/' + id + '/volume_chart'
         res = requests.get(req_url, params={'days': days})
@@ -46,16 +46,18 @@ def trading_volume(dex_cg_ids, start_date, end_date):
     pprint(df)
     df.to_csv('dex_trading_volume.csv')
 
-if __name__ == '__main__':
-    start_date = '2020-06-01'
-    end_date = '2021-08-31'
-    dex_cg_ids = [
-        'uniswap',
-        'uniswap_v2',
-        'uniswap_v1',
-        'sushiswap',
-        'pancakeswap',
-        'pancakeswap_v1',
-    ]
+def dex_coin_market_data(cg_ids, start_date, end_date):
+    pass
 
-    trading_volume(dex_cg_ids, start_date, end_date)
+if __name__ == '__main__':
+    # Load config file
+    with open('configs/dex_data_config.json') as f:
+        config = json.load(f)
+
+    # Prepare script parameters
+    start_date = config['start_date']
+    end_date = config['end_date']
+    dex_cg_ids = [k for k in config['dex'].keys()]
+    dex_coin_cg_ids = list(set([v['coin_id'] for v in config['dex'].values() if v['coin_id'] != '']))
+
+    dex_trading_volume(dex_cg_ids, start_date, end_date)

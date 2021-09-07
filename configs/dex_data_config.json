@@ -1,0 +1,39 @@
+{
+  "start_date": "2020-01-01",
+  "end_date": "2020-08-31",
+  "dex": {
+    "uniswap" : {
+      "coin_id": "uni"
+    },
+    "uniswap_v2" : {
+      "coin_id": "uni"
+    },
+    "uniswap_v1" : {
+      "coin_id": "uni"
+    },
+    "sushiswap" : {
+      "coin_id": "sushi"
+    },
+    "pancakeswap" : {
+      "coin_id": "cake"
+    },
+    "pancakeswap_v1" : {
+      "coin_id": "cake"
+    },
+    "dydx_perpetual" : {
+      "coin_id": ""
+    },
+    "perpetual_protocol" : {
+      "coin_id": "perpetual-protocol"
+    },
+    "leverj" : {
+      "coin_id": "leverj-gluon"
+    },
+    "futureswap" : {
+      "coin_id": "fst"
+    },
+    "mcdex" : {
+      "coin_id": "mcb"
+    }
+  }
+}
