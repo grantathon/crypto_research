@@ -7,6 +7,7 @@ from pprint import pprint
 CG_API_URL = "https://api.coingecko.com/api/v3/"
 
 def dex_trading_volume(cg_ids, start_date, end_date):
+    print('Getting DEX trading volume...')
     df_dict = {}
 
     # Number of days we need for data call
@@ -38,7 +39,10 @@ def dex_trading_volume(cg_ids, start_date, end_date):
         s = s.reindex(d_range, method='ffill')
 
         df_dict[id] = s
-        time.sleep(3)  # CG API has call limits
+        print('- ' + id)
+        time.sleep(5)  # CG API has call limits
+
+    print('Got DEX trading volume')
 
     # Combine, trime, and export data
     df = pd.DataFrame(df_dict)

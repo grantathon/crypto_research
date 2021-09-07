@@ -1,6 +1,6 @@
 {
   "start_date": "2020-01-01",
-  "end_date": "2020-08-31",
+  "end_date": "2021-08-31",
   "dex": {
     "uniswap" : {
       "coin_id": "uni"
