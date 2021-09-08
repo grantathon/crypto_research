@@ -2,6 +2,7 @@ import pandas as pd
 import utils
 import time
 from pycoingecko import CoinGeckoAPI
+# from pprint import pprint
 
 cg = CoinGeckoAPI()
 API_SLEEP_TIME = 5
@@ -16,13 +17,16 @@ def dex_trading_volume(cg_ids, start_date, end_date):
     today = pd.to_datetime('today')
     days = (today - start_date).days + 1
 
+    # Get BTC price data for later trading volume conversion
+    btc_data = coin_market_data(['bitcoin'], start_date, end_date)
+
     # Get trading volume data per DEX
     for id in cg_ids:
         res = cg.get_exchanges_volume_chart_by_id(id, days)
 
-        # Format data
+        # Format data and convert from BTC to USD
         s = utils.format_cg_num_series(res, fill_method='ffill')
-        df_dict[id] = s
+        df_dict[id] = (s * btc_data['bitcoin price']).dropna()
 
         print('- ' + id)
         time.sleep(API_SLEEP_TIME)  # CG API has call limits
@@ -31,6 +35,7 @@ def dex_trading_volume(cg_ids, start_date, end_date):
     df = pd.DataFrame(df_dict)
     df = df.loc[start_date:end_date]
     print('Got DEX trading volume')
+
     return df
 
 def coin_market_data(cg_ids, start_date, end_date):
@@ -43,7 +48,7 @@ def coin_market_data(cg_ids, start_date, end_date):
     today = pd.to_datetime('today')
     days = (today - start_date).days + 1
 
-    # TODO: Test this for shorter data requests
+    # TODO: Still needs to be tested for shorter data requests
     if(days <= 91):
         days = 91
 
@@ -55,7 +60,7 @@ def coin_market_data(cg_ids, start_date, end_date):
         s = utils.format_cg_num_series(res['prices'], fill_method='ffill')
         df_dict[id + ' price'] = s
         s = utils.format_cg_num_series(res['market_caps'], fill_method='ffill')
-        df_dict[id + ' market caps'] = s
+        df_dict[id + ' market cap'] = s
 
         print('- ' + id)
         time.sleep(API_SLEEP_TIME)  # CG API has call limits
@@ -64,4 +69,5 @@ def coin_market_data(cg_ids, start_date, end_date):
     df = pd.DataFrame(df_dict)
     df = df.loc[start_date:end_date]
     print('Got coin market data')
+
     return df
