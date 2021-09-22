@@ -1,10 +1,8 @@
 {
   "start_date": "2020-01-01",
   "end_date": "2021-09-22",
-  "dex": [
-    "uniswap_v1",
-    "uniswap_v2",
+  "coins": [
     "uniswap",
-    "perpetual_protocol"
+    "perpetual-protocol"
   ]
 }
