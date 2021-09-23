@@ -6,3 +6,4 @@ env/
 *.csv
 *.json
 output/
+.ipynb_checkpoints/
