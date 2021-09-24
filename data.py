@@ -21,6 +21,7 @@ def dex_trading_volume(cg_ids, start_date, end_date):
     btc_data = coin_market_data(['bitcoin'], start_date, end_date)
 
     # Get trading volume data per DEX
+    cg_ids = list(set(cg_ids))
     for id in cg_ids:
         res = cg.get_exchanges_volume_chart_by_id(id, days)
 
@@ -53,6 +54,7 @@ def coin_market_data(cg_ids, start_date, end_date):
         days = 91
 
     # Get market data per DEX coin
+    cg_ids = list(set(cg_ids))
     for id in cg_ids:
         res = cg.get_coin_market_chart_by_id(id=id, vs_currency='USD', days=days)
 
