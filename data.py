@@ -12,9 +12,7 @@ def dex_trading_volume(cg_ids, start_date, end_date):
     df_dict = {}
 
     # Number of days we need for data call
-    start_date = pd.to_datetime(start_date)
-    end_date = pd.to_datetime(end_date)
-    today = pd.to_datetime('today')
+    today = pd.to_datetime('today').date()
     days = (today - start_date).days + 1
 
     # Get BTC price data for later trading volume conversion
@@ -44,9 +42,7 @@ def coin_market_data(cg_ids, start_date, end_date):
     df_dict = {}
 
     # Number of days we need for data call
-    start_date = pd.to_datetime(start_date)
-    end_date = pd.to_datetime(end_date)
-    today = pd.to_datetime('today')
+    today = pd.to_datetime('today').date()
     days = (today - start_date).days + 1
 
     # TODO: Still needs to be tested for shorter data requests
