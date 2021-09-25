@@ -24,6 +24,9 @@ def volatility(returns):
 def pnl_performance(pnl, start_val):
     return pnl.cumsum() + start_val
 
+def performance(returns):
+    return (1 + returns).cumprod() - 1
+
 def sharpe_ratio(returns, risk_free_rate, ann_factor):
     ann_ret = ann_factor * np.mean(returns)
     ann_vol = np.sqrt(ann_factor) * volatility(returns)
