@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import timedelta
 # from pprint import pprint
 
 def nvf(market_caps, trading_volumes, trade_fee, avg_window, ann_factor):
@@ -57,5 +58,7 @@ def treynor_ratio(portfolio_returns, benchmark_returns, risk_free_rate, ann_fact
 
 def max_drawdown(returns):
     cum_ret = (1 + returns).cumprod()
+    cum_ret[cum_ret.index[0] - timedelta(days=1)] = 1
+    cum_ret.sort_index(inplace=True)
     max_ret = np.fmax.accumulate(cum_ret)
     return np.nanmin((cum_ret - max_ret) / max_ret)
